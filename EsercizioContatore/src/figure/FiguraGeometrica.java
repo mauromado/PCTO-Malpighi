@@ -1,7 +1,7 @@
 package figure;
 import java.lang.Exception;
 
-public class FiguraGeometrica {
+public abstract class FiguraGeometrica {
 	private int nLati;
 	private double[] lati;
 	
@@ -45,5 +45,11 @@ public class FiguraGeometrica {
 		}
 		return perimetro;
 	}
-
+	
+	abstract double area();
+	
+	public void toStringP() {
+		 System.out.println( "il perimetro vale: " + this.perimetro() );
+	}
+		
 }

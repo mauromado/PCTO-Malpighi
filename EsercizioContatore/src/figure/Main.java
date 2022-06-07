@@ -5,7 +5,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		FiguraGeometrica f1 = new FiguraGeometrica(3);
+		/**
+	 	FiguraGeometrica f1 = new FiguraGeometrica(3);
+		 
 		
 		try {
 		FiguraGeometrica f2= new FiguraGeometrica(-1);
@@ -29,7 +31,21 @@ public class Main {
 		}
 		
 		System.out.println("il perimetro vale "+f1.perimetro());
+		*/
+		Cerchio c1 = new Cerchio(5);
+		Rattangolo r1 = new Rattangolo(2,4);
+		Triangolo t1 = new Triangolo(2,4,5,2);
 		
+		c1.stampaArea();
+		c1.toStringP();
+		
+		r1.stampaArea();
+		r1.toStringP();
+		
+		t1.stampaArea();
+		t1.toStringP();
+	
+	
 	}
 
 }
