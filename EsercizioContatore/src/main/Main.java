@@ -15,5 +15,7 @@ public class Main
 		c1.inc(1);
 		c1.getValore();
 		c1.toString(c1.getValore());
+		
+		
 	}
 }
