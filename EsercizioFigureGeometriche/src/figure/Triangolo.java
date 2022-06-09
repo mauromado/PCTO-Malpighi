@@ -1,5 +1,5 @@
 package figure;
-import java.lang.Math;
+
 
 public class Triangolo {
 	private double altezza;
