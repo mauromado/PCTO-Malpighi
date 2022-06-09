@@ -14,7 +14,6 @@ public class Sottrazione {
 	}
 	
 	public void stampaSottrazione() {
-		String stamp = "La sottrazione fra i due numeri inseriti vale: " + calcolaSottrazione(); 
-		System.out.println(stamp);
+		System.out.println("La sottrazione fra i due numeri inseriti vale: " + calcolaSottrazione());
 	}
 }

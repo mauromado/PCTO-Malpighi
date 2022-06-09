@@ -18,7 +18,7 @@ public class Divisione {
 	}
 	
 	public void stampaDivisione() {
-		String stamp = "il Quoziente fra i due numeri inseriti vale: " + calcolaDivisione(); 
-		System.out.println(stamp);
+		System.out.println("il Quoziente fra i due numeri inseriti vale: " + calcolaDivisione());
 	}
 }
+

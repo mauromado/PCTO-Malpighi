@@ -14,7 +14,6 @@ public class Moltiplicazione {
 	}
 	
 	public void stampaMoltiplicazione() {
-		String stamp = "La moltiplicazione fra i due numeri inseriti vale: " + calcolaMoltiplicazione(); 
-		System.out.println(stamp);
+		System.out.println("La moltiplicazione fra i due numeri inseriti vale: " + calcolaMoltiplicazione());
 	}
 }

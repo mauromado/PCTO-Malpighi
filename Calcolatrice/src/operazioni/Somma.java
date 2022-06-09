@@ -14,7 +14,6 @@ public class Somma {
 	}
 	
 	public void stampaSomma() {
-		String stamp = "La somma fra i due numeri inseriti vale: " + calcolaSomma(); 
-		System.out.println(stamp);
+		System.out.println("La somma fra i due numeri inseriti vale: " + calcolaSomma());
 	}
 	}
