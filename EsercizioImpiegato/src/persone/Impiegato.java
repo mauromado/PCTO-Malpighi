@@ -19,5 +19,15 @@ public class Impiegato extends Persona{
 		return dettagli.toString();
 		
 	}
-
+	public double getSalario() {
+		return salario;
+	}
+	
+	public void setSalario(double salario) {
+		this.salario=salario;
+	}
+	
+	public void aumentaSalario(double percentuale){
+		setSalario(this.salario+this.salario*(percentuale/100));
+	}
 }

@@ -22,7 +22,7 @@ public class Persona {
 	public int getEtà() {
 		return eta;
 	}
-
+	
 	public String dettagli() {
 		StringBuilder dettagli = new StringBuilder();
 		dettagli.append("nome: ").append(nome).append("\n");
