@@ -1,6 +1,8 @@
 package tipoProdotti;
 
 import java.text.DateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.FormatStyle;
 import java.util.Locale;
@@ -32,8 +34,20 @@ public class Alimentare extends Prodotto {
 		DateTimeFormat formatterShort =
 				DateTimeFormat.ofLocalizedDate(FormatStyle.SHORT);*/
 		StringBuilder a = new StringBuilder();
-		a.append(super.toString()).append("La scadenza é¨: ").append(scadenza);
+		a.append(super.toString()).append("\nLa scadenza é: ").append(scadenza);
 		return a.toString();
 	}
-	
+	@Override
+	public void applicaSconto() {
+		Duration d1=Duration.ofDays(10);
+		Instant i1=Instant.now();
+		Instant i2=Instant.parse(scadenza.toString());
+		Duration d2=Duration.between(i2, i1);
+		if (d1.compareTo(d2)<0) {
+			prezzo=prezzo-0.2*prezzo;
+		}
+		else {
+			System.out.println("Nessuno sconto applicabile ");
+		}
+	}
 }
