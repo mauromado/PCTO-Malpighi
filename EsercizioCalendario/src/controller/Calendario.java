@@ -16,19 +16,6 @@ public class Calendario {
 		this.appuntamenti = new CollezioneAppuntamenti();
 	}
 	
-	public void aggiuntaAppuntamento(Appuntamento app) {
-		if(appuntamenti.getAppuntamenti().contains(app)) {
-			System.out.println("l'appuntamento è gia presente");
-		}
-		else {
-			appuntamenti.getAppuntamenti().add(app);
-		}
-	}
-	
-	public void rimuoviAppuntamento(Appuntamento app) {
-		appuntamenti.getAppuntamenti().remove(app);
-	}
-	
 	private boolean controlloSovrapposizione(LocalDateTime inizio, LocalDateTime fine,
 			LocalDateTime inizioRef, LocalDateTime fineRef) {
 		return inizio.isBefore(fineRef)&&fine.isBefore(inizioRef);

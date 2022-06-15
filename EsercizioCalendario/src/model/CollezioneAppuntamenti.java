@@ -18,5 +18,20 @@ public class CollezioneAppuntamenti {
 		this.appuntamenti = appuntamenti;
 	}
 	
+	public void aggiuntaAppuntamento(Appuntamento app) {
+		for(Appuntamento a : appuntamenti) {
+			if(a.equals(app)) {
+				System.out.println("l'appuntamento è gia presente");
+			}
+			else {
+				appuntamenti.add(app);
+			}
+		}
+		
+	}
+	
+	public void rimuoviAppuntamento(Appuntamento app) {
+		appuntamenti.remove(app);
+	}
 
 }
