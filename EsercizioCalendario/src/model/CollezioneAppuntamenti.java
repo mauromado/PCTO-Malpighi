@@ -18,14 +18,14 @@ public class CollezioneAppuntamenti {
 		this.appuntamenti = appuntamenti;
 	}
 	
-	public void aggiuntaAppuntamento(Appuntamento app) {
-		for(Appuntamento a : appuntamenti) {
-			if(a.equals(app)) {
-				System.out.println("l'appuntamento è gia presente");
+	public void aggiungiAppuntamento(Appuntamento appuntamento) {
+		if(appuntamenti.isEmpty()) {
+			appuntamenti.add(appuntamento);
+		} else {
+			if(!appuntamenti.contains(appuntamento)) {
+				appuntamenti.add(appuntamento);
 			}
-			else {
-				appuntamenti.add(app);
-			}
+			
 		}
 		
 	}
