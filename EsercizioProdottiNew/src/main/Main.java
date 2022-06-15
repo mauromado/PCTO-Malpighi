@@ -65,8 +65,14 @@ public class Main {
 				System.out.println("Inserisci l'anno: ");
 				anno=sc.nextInt();
 				LocalDate scadenza = LocalDate.of(anno,mese,giorno);
+				LocalDate actualDate = LocalDate.now();
+				if(scadenza.isBefore(actualDate)) {
+					System.out.println("La scadenza deve essere successiva alla data attuale,"
+							+ " prodotto non aggiunto alla lista");
+				}else {
 				Alimentare a = new Alimentare(codice,descrizione,prezzo,scadenza);
 				l1.addProdotto(a);
+				}
 			}else {
 				System.out.println("Inserisci il materiale del prodotto: ");
 				materiale=sc.next();
