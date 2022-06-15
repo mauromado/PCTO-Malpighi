@@ -6,7 +6,7 @@ public class NonAlimentare extends Prodotto {
 	private String materiale;
 
 	public NonAlimentare(String codice, String descrizione, double prezzo, String materiale) {
-		super(codice, descrizione, prezzo);
+		super(codice, descrizione, prezzo, "N");
 		this.materiale = materiale;
 	}
 

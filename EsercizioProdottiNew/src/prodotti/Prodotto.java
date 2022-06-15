@@ -6,11 +6,13 @@ public class Prodotto {
 	protected String codice;
 	protected String descrizione;
 	protected double prezzo;
+	protected String tipo;
 	
-	public Prodotto(String codice, String descrizione, double prezzo) {
+	public Prodotto(String codice, String descrizione, double prezzo,String tipo) {
 		this.codice = codice;
 		this.descrizione = descrizione;
 		this.prezzo = prezzo;
+		this.tipo=tipo;
 	}
 
 	public String getCodice() {
@@ -49,10 +51,12 @@ public class Prodotto {
 			.append("\nIl prezzo è:").append(prezzo).append(" €");
 		return p.toString();
 	}
-	public boolean equals(Prodotto p) {
-		return prezzo == p.getPrezzo()&& 
-				codice.contains(p.getCodice())&& 
-				descrizione.contains(p.getDescrizione());
+	@Override
+	public boolean equals(Object p) {
+		Prodotto prodotto =(Prodotto) p;
+		return prezzo == prodotto.getPrezzo()&& 
+				codice.contains(prodotto.getCodice())&& 
+				descrizione.contains(prodotto.getDescrizione());
 	}
 
 	

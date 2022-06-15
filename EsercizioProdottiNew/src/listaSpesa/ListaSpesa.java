@@ -23,7 +23,14 @@ public class ListaSpesa {
 		}
 		return prezzoTot;
 	}
-	
+	public double calcolaPrezzoTotSconto() {
+		double prezzoTot=0;
+		for(int i=0;i<prodotti.size();i++) {
+			prodotti.get(i).applicaSconto();
+			prezzoTot+=prodotti.get(i).getPrezzo();
+		}
+		return prezzoTot;
+	}
 	public void stampaProdotti() {
 		System.out.println("la tua lista della spesa è composta da: ");
 		for(int i=0;i<prodotti.size();i++) {

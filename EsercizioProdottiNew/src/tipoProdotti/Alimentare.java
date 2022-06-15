@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 //import java.time.format.DateTimeFormat;
@@ -15,8 +17,8 @@ import prodotti.Prodotto;
 public class Alimentare extends Prodotto {
 	private LocalDate scadenza;
 
-	public Alimentare(String codice, String descrizione, double prezzo, LocalDate scadenza) {
-		super(codice, descrizione, prezzo);
+	public Alimentare(String codice, String descrizione, double prezzo,  LocalDate scadenza) {
+		super(codice, descrizione, prezzo,"A");
 		this.scadenza = scadenza;
 	}
 
@@ -30,20 +32,20 @@ public class Alimentare extends Prodotto {
 	
 	@Override
 	public String toString() {
-		/*Locale.getDefault()
-		DateTimeFormat formatterShort =
-				DateTimeFormat.ofLocalizedDate(FormatStyle.SHORT);*/
+		Locale.getDefault();
+		//DateTimeFormatter formatterShort =
+		//		DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+		DateTimeFormatter formatterShort =
+				DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		StringBuilder a = new StringBuilder();
-		a.append(super.toString()).append("\nLa scadenza é: ").append(scadenza);
+		a.append(super.toString()).append("\nLa scadenza é: ").append(scadenza.format(formatterShort));
 		return a.toString();
 	}
 	@Override
 	public void applicaSconto() {
-		Duration d1=Duration.ofDays(10);
-		Instant i1=Instant.now();
-		Instant i2=Instant.parse(scadenza.toString());
-		Duration d2=Duration.between(i2, i1);
-		if (d1.compareTo(d2)<0) {
+		LocalDate actualDate = LocalDate.now();
+		Period p = Period.between(actualDate, scadenza);
+		if (p.getDays()<10) {
 			prezzo=prezzo-0.2*prezzo;
 		}
 		else {
