@@ -1,6 +1,8 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -44,7 +46,29 @@ public class CollezioneAppuntamentiTest {
 		assertEquals(1,collezioneAppuntamenti.getAppuntamenti().size());
 	}
 	
-	//Test remove
+	@Test
+	public void rimuoviAppuntamnetoTest() {
+		CollezioneAppuntamenti collezioneAppuntamenti = new CollezioneAppuntamenti();
+		Appuntamento app1 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4 ,12 ,00)
+				,Duration.of(0,ChronoUnit.MINUTES),"Verifica");
+		Appuntamento app2 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,5 ,22 ,30)
+				,Duration.of(0,ChronoUnit.MINUTES),"Compleanno");
+		collezioneAppuntamenti.aggiungiAppuntamento(app1);
+		collezioneAppuntamenti.aggiungiAppuntamento(app2);
+		collezioneAppuntamenti.rimuoviAppuntamento(app1);
+		assertEquals(1,collezioneAppuntamenti.getAppuntamenti().size());
+		assertTrue(collezioneAppuntamenti.getAppuntamenti().contains(app2));
+	}
 	
-	//Test get -> assertNotNull
+	@Test
+	public void getAppuntamento() {
+		CollezioneAppuntamenti collezioneAppuntamenti = new CollezioneAppuntamenti();
+		Appuntamento app1 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4 ,12 ,00)
+				,Duration.of(0,ChronoUnit.MINUTES),"Verifica");
+		Appuntamento app2 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,5 ,22 ,30)
+				,Duration.of(0,ChronoUnit.MINUTES),"Compleanno");
+		collezioneAppuntamenti.aggiungiAppuntamento(app1);
+		collezioneAppuntamenti.aggiungiAppuntamento(app2);
+		assertNotNull(collezioneAppuntamenti.getAppuntamenti());
+	}
 }

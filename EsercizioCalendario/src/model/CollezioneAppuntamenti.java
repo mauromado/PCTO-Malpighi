@@ -9,7 +9,7 @@ public class CollezioneAppuntamenti {
 	public CollezioneAppuntamenti() {
 		this.appuntamenti= new ArrayList<>();
 	}
-
+	
 	public List<Appuntamento> getAppuntamenti() {
 		return appuntamenti;
 	}

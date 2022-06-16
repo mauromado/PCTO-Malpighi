@@ -23,8 +23,28 @@ public class AppuntamentoTest {
 		app.setInizio(nuovoInizio);
 		assertEquals(nuovoInizio,app.getInizio());
 	}
-	//Aggiungere analogo per fine
-	//Aggiungere analogo per duration
+	@Test
+	public void testGetSetFine() {
+		LocalDateTime dataInizio = LocalDateTime.of(2020, Month.JUNE,4 ,12 ,40);
+		LocalDateTime dataFine = LocalDateTime.of(2020, Month.JUNE,4 ,13 ,40);
+		Appuntamento app= new Appuntamento(dataInizio,dataFine,"appuntamento test");
+		assertEquals(dataFine,app.getFine());
+		LocalDateTime dataFineNuova = LocalDateTime.of(2020, Month.JUNE,4 ,14 ,40);
+		app.setFine(dataFineNuova);
+		assertEquals(dataFineNuova,app.getFine());
+	}
+	
+	
+	@Test
+	public void testGetSetDuration() {
+		LocalDateTime data = LocalDateTime.of(2020, Month.JUNE,4 ,12 ,40);
+		Duration durata = Duration.of(0,ChronoUnit.MINUTES);
+		Appuntamento app= new Appuntamento(data,durata,"appuntamento test");
+		assertEquals(durata,app.getDuration());
+		Duration durataNuova = Duration.of(10,ChronoUnit.MINUTES);
+		app.setDuration(durataNuova);
+		assertEquals(durataNuova,app.getDuration());
+	}
 	@Test
 	public void testEqualsAppuntamentoSuccess() {
 		Appuntamento app1 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4 ,12 ,40)
