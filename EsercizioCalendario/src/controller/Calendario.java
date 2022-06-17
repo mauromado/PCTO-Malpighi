@@ -16,9 +16,9 @@ public class Calendario {
 		this.appuntamenti = new CollezioneAppuntamenti();
 	}
 	
-	private boolean controlloSovrapposizione(LocalDateTime inizio, LocalDateTime fine,
+	public boolean controlloSovrapposizione(LocalDateTime inizioToCheck, LocalDateTime fineToCheck,
 			LocalDateTime inizioRef, LocalDateTime fineRef) {
-		return !(fine.isBefore(inizioRef)||inizio.isAfter(fineRef));
+		return !(fineToCheck.isBefore(inizioRef)||inizioToCheck.isAfter(fineRef));
 	}
 	
 	private CollezioneAppuntamenti getAppuntamentiFascia(LocalDateTime inizio,LocalDateTime fine){

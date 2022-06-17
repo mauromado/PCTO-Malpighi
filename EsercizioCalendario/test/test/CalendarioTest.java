@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -134,5 +135,51 @@ public class CalendarioTest {
 		assertTrue(settimanali.getAppuntamenti().contains(app2));
 	}
 	
-
+	@Test
+	public void controlloSovrapposizioneTest() {
+		Calendario calendario = new Calendario();
+		Appuntamento appRiferimento = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4 ,10 ,00)
+				,Duration.of(30,ChronoUnit.MINUTES),"Verifica");
+		
+		Appuntamento appNonSovrapposto1 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,9 ,00)
+				,Duration.of(30,ChronoUnit.MINUTES),"Compleanno");
+		
+		Appuntamento appSovrapposto1 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,9 ,45)
+				,Duration.of(30,ChronoUnit.MINUTES),"cinema");
+		Appuntamento appSovrapposto2 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,10 ,10)
+				,Duration.of(10,ChronoUnit.MINUTES),"bar");
+		Appuntamento appSovrapposto3 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,10 ,25)
+				,Duration.of(15,ChronoUnit.MINUTES),"laser game");
+		Appuntamento appNonSovrapposto2 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,11 ,00)
+				,Duration.of(15,ChronoUnit.MINUTES),"piscina");
+		Appuntamento appSovrapposto4 = new Appuntamento(LocalDateTime.of(2020, Month.JUNE,4,9 ,50)
+				,Duration.of(45,ChronoUnit.MINUTES),"laser game");
+		calendario.aggiungiAppuntamentoCalendario(appRiferimento);
+		calendario.aggiungiAppuntamentoCalendario(appNonSovrapposto1);
+		calendario.aggiungiAppuntamentoCalendario(appSovrapposto1);
+		calendario.aggiungiAppuntamentoCalendario(appNonSovrapposto2);
+		calendario.aggiungiAppuntamentoCalendario(appSovrapposto2);
+		calendario.aggiungiAppuntamentoCalendario(appSovrapposto3);
+		calendario.aggiungiAppuntamentoCalendario(appSovrapposto4);
+		assertFalse(calendario.controlloSovrapposizione
+				(appNonSovrapposto1.getInizio(), appNonSovrapposto1.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		assertTrue(calendario.controlloSovrapposizione
+				(appSovrapposto1.getInizio(), appSovrapposto1.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		assertFalse(calendario.controlloSovrapposizione
+				(appNonSovrapposto2.getInizio(), appNonSovrapposto2.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		assertTrue(calendario.controlloSovrapposizione
+				(appSovrapposto2.getInizio(), appSovrapposto2.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		assertTrue(calendario.controlloSovrapposizione
+				(appSovrapposto3.getInizio(), appSovrapposto3.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		assertTrue(calendario.controlloSovrapposizione
+				(appSovrapposto4.getInizio(), appSovrapposto4.getFine(),
+						appRiferimento.getInizio(), appRiferimento.getFine()));
+		
+		
+	}
 }
