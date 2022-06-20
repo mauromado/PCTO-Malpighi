@@ -46,7 +46,7 @@ public class CalendarioView {
 			System.err.println("Durata non valida.");
 			return;
 		}
-		Duration durata = Duration.ofMinutes(durataInMinuti);//vuole un long
+		Duration durata = Duration.ofMinutes(durataInMinuti);
 		
 		
 		System.out.println("Insersci la descrizione dell appuntamento: ");
@@ -80,6 +80,7 @@ public class CalendarioView {
 			return null;
 		}
 	}
+	
 	public void rimuoviAppuntamento() {
 		LocalDate data = chiediDataUtente();
 		if (data==null) {
@@ -99,4 +100,82 @@ public class CalendarioView {
 		System.out.println("Rimozione avvenuta con successo.");
 		
 	}
+	
+	private LocalDate chiediAnnoMeseUtente() {
+		System.out.println("Inserisci mese e anno (mm/aa): ");
+		String annoMeseInseriti = stdInput.readString();
+		annoMeseInseriti = "01/"+annoMeseInseriti;
+		try {
+			return LocalDate.parse(annoMeseInseriti, localDateFormatter);
+		}catch (DateTimeParseException e) {
+			System.err.println("Formato data non valido.");
+			return null;
+		}
+	}
+	
+	public void stampaAppuntamentiGiornalieri() {
+		LocalDate giorno = chiediDataUtente();
+		if(giorno==null) {
+			return ;
+		}
+		CollezioneAppuntamenti giornalieri = calendario.getAppuntamentiGiornalieri(giorno);
+		if(giornalieri.getAppuntamenti().size()==0) {
+			System.out.println("Non ci sono appuntamenti in questa data.");
+			return;
+		}
+		for(int i=0; i<giornalieri.getAppuntamenti().size();i++) {
+			System.out.println(giornalieri.getAppuntamenti().get(i).toString());
+		}
+	}
+	
+	public void stampaAppuntamentiMese() {
+		LocalDate mese = chiediAnnoMeseUtente();
+		if(mese==null) {
+			return;
+		}
+		CollezioneAppuntamenti giornalieri = calendario.getAppuntamentiMensili(mese);
+		if(giornalieri.getAppuntamenti().size()==0) {
+			System.out.println("Non ci sono appuntamenti in questo mese.");
+			return;
+		}
+		for(int i=0; i<giornalieri.getAppuntamenti().size();i++) {
+			System.out.println(giornalieri.getAppuntamenti().get(i).toString());
+		}
+	}
+	
+	public void stampaAppuntamentiSettimana() {
+		LocalDate settimana = chiediDataUtente();
+		if(settimana==null) {
+			return;
+		}
+		CollezioneAppuntamenti settimanali = calendario.getAppuntamentiSettimanali(settimana);
+		if(settimanali.getAppuntamenti().size()==0) {
+			System.out.println("Non ci sono appuntamenti in questa settimana.");
+			return;
+		}
+		for(int i=0; i<settimanali.getAppuntamenti().size();i++) {
+			System.out.println(settimanali.getAppuntamenti().get(i).toString());
+		}
+	}
+	
+	public void StampaAppuntamenti() {
+		CollezioneAppuntamenti totali = calendario.getAppuntamenti();
+		if(totali.getAppuntamenti().size()==0) {
+			System.out.println("Non ci sono appuntamenti in programma.");
+			return;
+		}
+		for(int i=0; i<totali.getAppuntamenti().size();i++) {
+			System.out.println(totali.getAppuntamenti().get(i).toString());
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
