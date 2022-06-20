@@ -5,7 +5,7 @@ import ioutils.StdInput;
 public class Menu {
 	private String[] menuItems;
 	private String titolo;
-	private StdInput stdInput;
+	private StdInput stdInput = new StdInput();
 	
 	public Menu(String[] menuItems, String titolo) {
 		this.menuItems = menuItems;

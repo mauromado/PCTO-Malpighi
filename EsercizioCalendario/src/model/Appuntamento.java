@@ -58,7 +58,7 @@ public class Appuntamento {
 		DateTimeFormatter formatter = 
 				DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT,FormatStyle.SHORT);
 		return ("Impegno: "+descrizione+" con inizio "+formatter.format(inizio)+
-				" e con fine"+formatter.format(fine));
+				" e con fine "+formatter.format(fine));
 	}
 	
 	public boolean equals(Appuntamento appuntamento) {

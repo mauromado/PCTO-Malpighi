@@ -21,7 +21,7 @@ public class CalendarioView {
 	private DateTimeFormatter localTimeFormatter;
 	
 	public CalendarioView() {
-		Calendario calendario = new Calendario();
+		calendario = new Calendario();
 		localDateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.ITALY);
 		localTimeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.ITALY);
 	}
