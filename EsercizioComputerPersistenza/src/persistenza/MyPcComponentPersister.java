@@ -156,7 +156,7 @@ public class MyPcComponentPersister implements PcComponentPersister{
 	}
 	
 	private String toLineComponent(PcComponent comp) {
-		String componentType = comp.getDescription();
+		String componentType = comp.getManufacturer();
 		 switch(componentType.toLowerCase()) {
 		 case "cpu": 
 			 return toLineCpu((Cpu) comp);
@@ -182,8 +182,7 @@ public class MyPcComponentPersister implements PcComponentPersister{
 	
 	private StringBuilder toLineCampiComuni(PcComponent comp) {
 		StringBuilder line = new StringBuilder();
-		line.append(comp.getDescription()).append(";")
-			.append(comp.getManufacturer()).append(";")
+		line.append(comp.getManufacturer()).append(";")
 			.append(comp.getModel()).append(";")
 			.append(comp.getPrice()).append(";")
 			.append(comp.getDescription()).append(";")
