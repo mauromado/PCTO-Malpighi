@@ -76,7 +76,7 @@ public abstract class PcComponent implements Serializable {
 		this.price = price;
 	}
 	
-	public boolean Available() {
+	public boolean isAvailable() {
 		return Available;
 	}
 
