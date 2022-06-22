@@ -7,6 +7,7 @@ import java.io.Writer;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import model.Ram;
 public class MyPcComponentPersister implements PcComponentPersister{
 	private static final String SEPARATOR = ";";
 	private static final NumberFormat NUMBER_FORMAT = NumberFormat.getInstance(Locale.ITALY);
+	private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE;
 	
 	
 	private PcComponent readComponent(String line) throws BadFileFormatException {
@@ -172,7 +174,7 @@ public class MyPcComponentPersister implements PcComponentPersister{
 	}
 	
 	private String toLineBoolean(Boolean bool) {
-		if(bool==true) {
+		if(bool) {
 			String result = "Y";
 			return result;
 		}
@@ -232,10 +234,109 @@ public class MyPcComponentPersister implements PcComponentPersister{
 	public void save(List<PcComponent> list, Writer writer) throws IOException {
 		String line = null;
 		for(PcComponent elemento : list) {
-			line = toLineComponent(elemento);
-			writer.write(line);
+			
+			writeComponent(elemento,writer);
 		}
 		
 		
 	}
+	
+	private void writeComponent(PcComponent comp, Writer writer) throws IOException {
+		if (comp instanceof Ram) {
+			writer.write("Ram");
+		}else if (comp instanceof Monitor) {
+			writer.write("Monitor");
+		}else if (comp instanceof PowerSupply) {
+			writer.write("PowerSupply");
+		}else if (comp instanceof Cpu) {
+			writer.write("Cpu");
+		}else {
+			throw new IllegalArgumentException("Serializzazione non supportata per "+comp);
+		}
+		writer.write(SEPARATOR);
+		writeCommonFields(comp,writer);
+		if (comp instanceof Ram) {
+			writeRam((Ram) comp, writer);
+		}else if (comp instanceof Monitor) {
+			writeMonitor((Monitor) comp, writer);
+		}else if (comp instanceof PowerSupply) {
+			writePowerSupply((PowerSupply) comp, writer);
+		}else if (comp instanceof Cpu) {
+			writeCpu((Cpu) comp, writer);
+		}
+		writer.write("\n");
+	}
+	
+	private void writeCommonFields(PcComponent comp, Writer writer) throws IOException {
+		writer.write(comp.getManufacturer());
+		writer.write(SEPARATOR);
+		
+		writer.write(comp.getModel());
+		writer.write(SEPARATOR);
+		
+		writer.write(NUMBER_FORMAT.format(comp.getPrice()));
+		writer.write(SEPARATOR);
+		
+		writer.write(comp.getDescription());
+		writer.write(SEPARATOR);
+		
+		String available = comp.isAvailable() ? "Y" : "N";
+		writer.write(available);
+		writer.write(SEPARATOR);
+		
+		writer.write(comp.getInserted().format(DATE_FORMAT));
+		writer.write(SEPARATOR);
+		
+		String outOfProd = comp.getOutOfProduction()!= null ? comp.getOutOfProduction().format(DATE_FORMAT) : "-";
+		writer.write(outOfProd);
+		writer.write(SEPARATOR);
+	}
+	
+	private void writeCpu(Cpu cpu, Writer writer) throws IOException {
+		writer.write(Integer.toString(cpu.getNumberOfCores()));
+		writer.write(SEPARATOR);
+		
+		writer.write(NUMBER_FORMAT.format(cpu.getFrequencyInGHz()));
+		writer.write(SEPARATOR);
+		
+		String gpu = cpu.isIntegratedGpu() ? "Y" : "N";
+		writer.write(gpu);
+		writer.write(SEPARATOR);
+	}
+	
+	public void writeRam(Ram ram, Writer writer) throws IOException {
+		writer.write(Integer.toString(ram.getCapacityInMB()));
+		writer.write(SEPARATOR);
+		
+		writer.write(ram.getStandard());
+		writer.write(SEPARATOR);
+		
+		writer.write(Integer.toString(ram.getFrequencyInMHz()));
+		writer.write(SEPARATOR);
+	}
+	
+	public void writePowerSupply(PowerSupply p, Writer writer) throws IOException {
+		writer.write(Integer.toString(p.getPowerOutputInW()));
+		writer.write(SEPARATOR);
+		
+		writer.write(p.getCertification());
+		writer.write(SEPARATOR);
+	}
+	
+	public void writeMonitor(Monitor mon, Writer writer) throws IOException {
+		writer.write(mon.getResolution());
+		writer.write(SEPARATOR);
+		
+		writer.write(mon.getAspectRatio());
+		writer.write(SEPARATOR);
+		
+		writer.write(Integer.toString(mon.getResponseTimeInMs()));
+		writer.write(SEPARATOR);
+	}
 }
+	
+	
+	
+	
+	
+	

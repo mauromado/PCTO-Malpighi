@@ -65,6 +65,7 @@ public class MyPcComponentPersisterTest {
 		per1.save(lista2, writer2);
 		assertTrue(confrontoFile("damp1.txt", "damp2.Txt"));
 	}
+	
 	@Test(expected=BadFileFormatException.class)
 	public void testLoadFailForPrice() throws IOException, BadFileFormatException {
 		String toRead = "Ram;Kingston;KVR16LS11/4;19.xe98;Non-ECC CL11 SODIMM;Y;2016-04-28;2017-04-15;4096;DDR3;1600;"+
